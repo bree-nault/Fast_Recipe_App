@@ -17,7 +17,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const proxyurl = "https://stormy-hamlet-48413.herokuapp.com/";
 const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat +"," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc"; // site that doesn’t send Access-Control-*
 fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
 .then(response => response.json())
@@ -26,7 +26,8 @@ fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
 */
 
 var myHeaders = new Headers();
-myHeaders.append("Access-Control-Allow-Origin", "*");
+myHeaders.append("Access-Control-Allow-Origin", "https://bree-nault.github.io/Fast_Recipe_App/");
+myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
 
 var requestOptions = {
@@ -39,10 +40,7 @@ fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-  console.log(responseJson)
 
-  console.log(responseJson.results[0].geometry.location.lat);
-  console.log(responseJson.results[0].geometry.location.lng);
 };
 
 // get longitude and latitude
