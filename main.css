@@ -4,7 +4,8 @@
   
   body {
 
-    background-image: url("/images/Background_Food6.jpg");
+    background-image: url("/webImages/backgroundFood6.jpg");
+    
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
