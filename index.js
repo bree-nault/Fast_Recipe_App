@@ -6,9 +6,9 @@ function getPlaces(responseJson) {
 
   let lat = responseJson.results[0].geometry.location.lat;
   let lng = responseJson.results[0].geometry.location.lng;
-
+/*
 var myHeaders = new Headers();
-myHeaders.append("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+myHeaders.append("Access-Control-Allow-Origin", "*");
 myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
 
 var requestOptions = {
@@ -17,11 +17,28 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=500&types=food&keyword=soup&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc", requestOptions)
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat +"," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc"; // site that doesn’t send Access-Control-*
+fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+.then(response => response.json())
+.then(contents => console.log(contents))
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+*/
+
+var myHeaders = new Headers();
+myHeaders.append("Access-Control-Allow-Origin", "*");
+myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat +"," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
   console.log(responseJson)
 
   console.log(responseJson.results[0].geometry.location.lat);
