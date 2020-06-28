@@ -1,0 +1,43 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+
+    background-image: url("../images/Background_Food6.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 80% 0%; 
+
+    font-family: "Roboto", sans-serif;
+    color: #000000;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  header {
+    text-align: left;
+    padding: 5% 0;
+  }
+  
+  section {
+    min-height: 200px;
+    margin: 30% 5% 0% 5%;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5%;
+    background: rgba(255, 255, 255, 0.4)
+  }
+  
+  .contentBox {
+    padding: 10% ;
+  }
+
+  h1 {
+    margin: 0%;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    }

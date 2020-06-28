@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>What's for Dinner?</title>
+    <meta name="description" content="Find a quick recipe for whatever you are in the mood for!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+    
+    <!-- <nav> 
+    </nav>-->
+    
+    <main role="main" class='container' >
+
+        <header role="banner">
+<!-- Put in Logo -->
+            Logo! 
+        </header>
+
+        <section class="contentBox homePage">
+
+            <h1>Get a recipe!</h1>
+
+            <p>Not sure what to make? 
+                Tell us what you're in the 
+                mood for and we'll find 
+                you a recipe!</p>
+
+                <label for="search-term">
+                    What are you in the mood for?</label>
+                <input type="text" 
+                name="foodType" class="inputBox" required>
+                <input id="foodType" type="submit" value="Get me a recipe!">
+
+        </section>
+
+        <section class="contentBox recipePage">
+            <div class="recipeScreen">Recipe Screen</div>
+            <div>
+                <input id="recipeButton" type="submit" name="button" value="Not this recipe!"/>
+                <input id="moodButton" type="submit" name="button"  value="My mood changed!"/>
+                <input id="placeButton" type="submit" name="button" value="I give up.">
+            </div>
+        </section>
+
+        <section class="contentBox recipeDetails">
+            Recipe Info
+        </section>
+
+        <section class="contentBox moodPage">
+           
+                <label for="search-term">
+                    What are you in the mood for?</label>
+                <input type="text" 
+                name="newType" class="inputBox" required>
+                <input id="newType" type="submit" value="Get me a recipe!">
+            
+        </section>
+
+        <section class="contentBox placeList">
+        <div class="addressInputBox"></div>
+            <label for="search-term">
+            Where are you?</label>
+        <input type="text" 
+        name="locationBox" class="inputBox" required>
+        <input id="locationSubmit" type="submit" value="Here I am!">
+        </div>
+        <div class="placeListBox"></div>
+        </section>
+
+
+    </main>
+
+    <!--<footer role="contentinfo"> 
+    </footer>-->
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="index.js"></script>
+
+</body>
+</html>
