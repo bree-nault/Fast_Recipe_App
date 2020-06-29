@@ -13,66 +13,72 @@
 </head>
 
 <body id="top">
-    
+
     <!-- <nav> 
     </nav>-->
-    
-    <main role="main" class='container' >
+
+    <main role="main" class='container'>
 
         <header role="banner">
 <!-- Put in Logo -->
-            Logo! 
+            Logo!
         </header>
 
-        <section class="contentBox homePage">
+        <section class="contentBox homePage hidden">
 
-            <h1>Get a recipe!</h1>
+            <div class="introText">
+                <h1>Get a recipe!</h1>
 
-            <p>Not sure what to make? 
-                Tell us what you're in the 
-                mood for and we'll find 
-                you a recipe!</p>
+                <p>Not sure what to make?
+                    Tell us what you're in the
+                    mood for and we'll find
+                    you a recipe!</p>
+            </div>
 
+            <div>
                 <label for="search-term">
                     What are you in the mood for?</label>
-                <input type="text" 
-                name="foodType" class="inputBox" required>
+                <input type="text" onfocus="this.value=''" name="foodType" class="inputBox" required>
                 <input id="foodType" type="submit" value="Get me a recipe!">
+            </div>
 
         </section>
 
-        <section class="contentBox recipePage">
-            <div class="recipeScreen">Recipe Screen</div>
-            <div>
-                <input id="recipeButton" type="submit" name="button" value="Not this recipe!"/>
-                <input id="moodButton" type="submit" name="button"  value="My mood changed!"/>
+        <section class="contentBox recipePage hidden">
+
+            <div class="recipeScreen"></div>
+
+            <div class="ingredientList">
+                <ul class="resultsList">
+                </ul>
+            </div>
+
+            <div class="buttons">
+                <!-- <input id="recipeInfoButton" type="submit" name="button" value="Tell me more!" />-->
+                <input id="recipeButton" type="submit" name="button" value="Not this recipe!" />
+                <input id="moodButton" type="submit" name="button" value="My mood changed!" />
                 <input id="placeButton" type="submit" name="button" value="I give up.">
             </div>
+
         </section>
 
-        <section class="contentBox recipeDetails">
-            Recipe Info
+        <section class="contentBox recipeDetails hidden">
         </section>
 
-        <section class="contentBox moodPage">
-           
-                <label for="search-term">
-                    What are you in the mood for?</label>
-                <input type="text" 
-                name="newType" class="inputBox" required>
-                <input id="newType" type="submit" value="Get me a recipe!">
-            
-        </section>
+        <section class="contentBox placeList hidden">
 
-        <section class="contentBox placeList">
-        <div class="addressInputBox"></div>
+            <div class="addressInputBox">
             <label for="search-term">
-            Where are you?</label>
-        <input type="text" 
-        name="locationBox" class="inputBox" required>
-        <input id="locationSubmit" type="submit" value="Here I am!">
-        </div>
-        <div class="placeListBox"></div>
+                Where are you?</label>
+            <input type="text" name="locationBox" class="inputBox" required>
+            <input id="locationSubmit" type="submit" value="Here I am!">
+            </div>
+
+
+            <div class="placeListBox">
+                <ul class="placeList">
+                </ul>
+            </div>
         </section>
 
 
@@ -82,14 +88,17 @@
     </footer>-->
 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc&libraries=places"></script>
     <script defer src="index.js"></script>
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc&libraries=places"></script>
+
     <script src="https://apis.google.com/js/api.js" type="text/javascript"></script>
-<script type="text/javascript">
-  gapi.load('auth2', function() {
-    // Library loaded.
-  });
-</script>
+    <script type="text/javascript">
+        gapi.load('auth2', function () {
+            // Library loaded.
+        });
+    </script>
 
 </body>
+
 </html>

@@ -2,44 +2,52 @@
 var foodType = {};
 
 
+function getRecipeDetails() {
+
+  $('.contentBox').hide();
+  $('.recipeDetails').show();
+
+}
+
+function results(contents) {
+  
+  console.log(contents);
+  //Finds and displays username
+
+    $('.placeList').empty();
+
+    $('.placeList').append(`<h2>Go get some food:</h2>`);
+    for (let i = 0; i < contents.results.length; i++) {
+      $('.placeList').append(`<li>
+      <h3>${contents.results[i].name}</h3>
+      <p>${contents.results[i].vicinity}</p>
+          </li>`);
+
+}
+  $('.placeList').show();
+
+};
 function getPlaces(responseJson) {
 
-  let lat = responseJson.results[0].geometry.location.lat;
-  let lng = responseJson.results[0].geometry.location.lng;
-/*
-var myHeaders = new Headers();
-myHeaders.append("Access-Control-Allow-Origin", "*");
-myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
+  var lat = responseJson.results[0].geometry.location.lat;
+  var lng = responseJson.results[0].geometry.location.lng;
 
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
+  var myHeaders = new Headers();
+  myHeaders.append("Access-Control-Allow-Origin", "*");
+  myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
 
-const proxyurl = "https://stormy-hamlet-48413.herokuapp.com/";
-const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat +"," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc"; // site that doesn’t send Access-Control-*
-fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-.then(response => response.json())
-.then(contents => console.log(contents))
-.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-*/
+  var requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
 
-var myHeaders = new Headers();
-myHeaders.append("Access-Control-Allow-Origin", "https://bree-nault.github.io/Fast_Recipe_App/");
-myHeaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-myHeaders.append("key", "AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};
-
-fetch("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat +"," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat + "," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc"; // site that doesn’t send Access-Control-*
+  fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
+    .then(response => response.json())
+    .then(contents => results(contents))
+    .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
 };
 
@@ -51,7 +59,7 @@ function getCoordinates(addressEntered) {
     redirect: 'follow'
   };
 
-  fetch("https://maps.googleapis.com/maps/api/geocode/json?address=" + addressEntered + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc", requestOptions)
+  fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressEntered}&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc`, requestOptions)
     .then(response => response.json())
     .then(responseJson => getPlaces(responseJson))
     .catch(error => alert('Something went wrong. Try again later.'));
@@ -70,25 +78,11 @@ function getAddress() {
 function placeForm() {
 
   console.log('Place Section Displayed!');
-  $('.homePage').hide();
-  $('.recipePage').hide();
-  $('.recipeDetails').hide();
-  $('.moodPage').hide();
+
+  $('.contentBox').hide();
   $('.placeList').show();
 
 };
-
-// Displays sections to change user input
-function moodForm() {
-
-  console.log('Mood Section Displayed!');
-  $('.homePage').hide();
-  $('.recipePage').hide();
-  $('.recipeDetails').hide();
-  $('.moodPage').show();
-  $('.placeList').hide();
-};
-
 
 // Displays Results for Recipe
 function displayResults(responseJson) {
@@ -97,19 +91,27 @@ function displayResults(responseJson) {
 
   //Finds and displays username
   let recipeinfo = `
-        <h2><span> Recipe: ${responseJson.recipes[0].title}</span></h2>
-        <p><span> Summary: ${responseJson.recipes[0].summary}</span></p>
+  <img src= ${responseJson.recipes[0].image} class="imgStyle" alt="Recipe Photo">
+        <h2><span> ${responseJson.recipes[0].title}</span></h2>
+        <p><span> Make Time: ${responseJson.recipes[0].readyInMinutes}</span></p>
+  
     `
-
   $('.recipeScreen').html(recipeinfo)
 
-  //display the results section
+  // Ingredient List
+  $('.resultsList').empty();
+  $('.resultsList').append(`<h3>Ingredient List:</h3>`);
+  for (let i = 0; i < responseJson.recipes[0].extendedIngredients.length; i++) {
+    $('.resultsList').append(`<li><p>${responseJson.recipes[0].extendedIngredients[i].name}</p>
+        </li>`);
+  }
+  $('.resultsList').append(`
+  <h3> Instructions: </h3>
+  <p>${responseJson.recipes[0].instructions}</p>`);
 
-  $('.homePage').hide();
+  //display the results section
+  $('.contentBox').hide();
   $('.recipePage').show();
-  $('.recipeDetails').hide();
-  $('.moodPage').hide();
-  $('.placeList').hide();
 };
 
 // Determines if there are items in the array
@@ -141,9 +143,7 @@ function getRecipe() {
     .catch(error => alert('Something went wrong. Try again later.'));
 };
 
-
 // Get the users input
-// Can these two functions be consolidated?
 function getFoodType() {
   event.preventDefault();
   foodType.food = $('input[name="foodType"]').val();
@@ -151,22 +151,21 @@ function getFoodType() {
   getRecipe();
 };
 
-function getNewFood() {
-  event.preventDefault();
-  foodType.food = $('input[name="newType"]').val();
-  console.log('You searched for ' + foodType.food + '.');
-  getRecipe();
+// Displays sections to change user input
+function moodForm() {
+
+  $('.contentBox').hide();
+  $('.homePage').show();
+  $('.introText').hide();
+
 };
 
 // Sets up the Homepage
 $(function () {
 
   console.log('App loaded! Waiting for submit!');
+
   $('.homePage').show();
-  $('.recipePage').hide();
-  $('.recipeDetails').hide();
-  $('.moodPage').hide();
-  $('.placeList').hide();
 
 });
 
@@ -175,5 +174,5 @@ document.getElementById("foodType").addEventListener("click", getFoodType);
 document.getElementById("recipeButton").addEventListener("click", getRecipe);
 document.getElementById("moodButton").addEventListener("click", moodForm);
 document.getElementById("placeButton").addEventListener("click", placeForm);
-document.getElementById("newType").addEventListener("click", getNewFood);
 document.getElementById("locationSubmit").addEventListener("click", getAddress); 
+//document.getElementById("recipeInfoButton").addEventListener("click", getRecipeDetails); 
