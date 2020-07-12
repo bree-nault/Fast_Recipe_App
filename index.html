@@ -5,6 +5,7 @@
     <title>What's for Dinner?</title>
     <meta name="description" content="Find a quick recipe for whatever you are in the mood for!">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset = "UTF-8" />
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -21,7 +22,9 @@
 
         <header role="banner">
 <!-- Put in Logo -->
-            Logo!
+           <div class="logoBox">
+            <input type="image" src="webImages\logo.gif" alt="Logo for What's for Dinner?" name="logoButton" id="logoButton">
+           </div> 
         </header>
 
         <section class="contentBox homePage hidden">
@@ -35,11 +38,17 @@
                     you a recipe!</p>
             </div>
 
+            <div class="moodText">
+
+            </div>
+
             <div>
+            <form>
                 <label for="search-term">
                     What are you in the mood for?</label>
-                <input type="text" onfocus="this.value=''" name="foodType" class="inputBox" required>
-                <input id="foodType" type="submit" value="Get me a recipe!">
+                <input type="text" onfocus="this.value=''" name="foodType" class="inputBox" required/>
+                <input id="foodType" class="button" type="submit" value="Get me a recipe!" />
+            </form>
             </div>
 
         </section>
@@ -55,9 +64,9 @@
 
             <div class="buttons">
                 <!-- <input id="recipeInfoButton" type="submit" name="button" value="Tell me more!" />-->
-                <input id="recipeButton" type="submit" name="button" value="Not this recipe!" />
-                <input id="moodButton" type="submit" name="button" value="My mood changed!" />
-                <input id="placeButton" type="submit" name="button" value="I give up.">
+                <input id="recipeButton" class="button" type="submit" name="button" value="Not this recipe!" />
+                <input id="moodButton" class="button" type="submit" name="button" value="My mood changed!" />
+                <input id="placeButton" class="button" type="submit" name="button" value="I give up.">
             </div>
 
         </section>
@@ -67,17 +76,26 @@
 
         <section class="contentBox placeList hidden">
 
+
             <div class="addressInputBox">
+            <h2>Where are you?</h2>    
             <label for="search-term">
-                Where are you?</label>
+                Please enter your city and state or your zipcode</label>
             <input type="text" name="locationBox" class="inputBox" required>
-            <input id="locationSubmit" type="submit" value="Here I am!">
+            <input id="locationSubmit" class="button"  type="submit" value="Here I am!">
             </div>
 
 
             <div class="placeListBox">
-                <ul class="placeList">
+                <ul class="placeListUL">
                 </ul>
+            </div></section>
+            <section class="contentBox placeList hidden">
+            <div class="buttons placeList">
+                <h3 class="h3Style">No! Take me back!</h3>
+                <input id="backButton" class="button" type="submit" name="button" value="Get me a recipe!" />
+                <input id="mood2Button" class="button" type="submit" name="button" value="My mood changed!" />
+
             </div>
         </section>
 

@@ -3,10 +3,8 @@ var foodType = {};
 
 
 function getRecipeDetails() {
-
   $('.contentBox').hide();
   $('.recipeDetails').show();
-
 }
 
 function results(contents) {
@@ -14,19 +12,30 @@ function results(contents) {
   console.log(contents);
   //Finds and displays username
 
-    $('.placeList').empty();
+    $('.placeListUL').empty();
 
-    $('.placeList').append(`<h2>Go get some food:</h2>`);
+    $('.placeListUL').append(`<h2>Places serving ${foodType.food}:</h2>`);
     for (let i = 0; i < contents.results.length; i++) {
-      $('.placeList').append(`<li>
+      $('.placeListUL').append(`<li>
       <h3>${contents.results[i].name}</h3>
       <p>${contents.results[i].vicinity}</p>
           </li>`);
 
 }
   $('.placeList').show();
-
+  $('.addressInputBox').hide();
 };
+
+// Determines if there are items in the array
+function determineArray2(contents) {
+  if (!contents.results.length) {
+    console.log('error')
+    alert('Places serving ' + foodtype.food + ' were not found.')
+  } else {
+    results(contents)
+  }
+};
+
 function getPlaces(responseJson) {
 
   var lat = responseJson.results[0].geometry.location.lat;
@@ -46,10 +55,11 @@ function getPlaces(responseJson) {
   const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat + "," + lng + "&radius=500&types=food&keyword=" + foodType.food + "&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc"; // site that doesn’t send Access-Control-*
   fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
     .then(response => response.json())
-    .then(contents => results(contents))
+    .then(contents => determineArray2(contents))
     .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
 
 };
+
 
 // get longitude and latitude
 function getCoordinates(addressEntered) {
@@ -62,14 +72,14 @@ function getCoordinates(addressEntered) {
   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressEntered}&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc`, requestOptions)
     .then(response => response.json())
     .then(responseJson => getPlaces(responseJson))
-    .catch(error => alert('Something went wrong. Try again later.'));
+    .catch(error => alert('Please enter your city and state.'));
 
 };
 
 // Grab address from user 
 function getAddress() {
   event.preventDefault();
-  let addressEntered = $('input[name="locationBox"]').val();
+  let addressEntered = $('input[name="locationBox"]').val().toLowerCase();
   console.log('Your address is ' + addressEntered + '.');
   getCoordinates(addressEntered);
 };
@@ -78,9 +88,11 @@ function getAddress() {
 function placeForm() {
 
   console.log('Place Section Displayed!');
-
+  $('.placeListUL').empty();
   $('.contentBox').hide();
+  $('.addressInputBox').show();
   $('.placeList').show();
+
 
 };
 
@@ -112,6 +124,7 @@ function displayResults(responseJson) {
   //display the results section
   $('.contentBox').hide();
   $('.recipePage').show();
+  $('html,body').scrollTop(0);
 };
 
 // Determines if there are items in the array
@@ -146,26 +159,46 @@ function getRecipe() {
 // Get the users input
 function getFoodType() {
   event.preventDefault();
-  foodType.food = $('input[name="foodType"]').val();
+  foodType.food = $('input[name="foodType"]').val().toLowerCase();
+
+  if (foodType.food.length == 0){
+    alert(`Please enter what you're hungry for!`)
+  } else {
   console.log('You searched for ' + foodType.food + '.');
   getRecipe();
+};
 };
 
 // Displays sections to change user input
 function moodForm() {
+  $('.moodText').empty()
+
+  $('.moodText').append(`
+  <h2>My Mood Changed!</h2>
+
+  <p>Not feeling ${foodType.food} anymore?</p>
+  <p> Well, what are you in the mood for? Pizza? Tacos? Soup?!</p>`);
 
   $('.contentBox').hide();
   $('.homePage').show();
   $('.introText').hide();
+  $(`.moodText`).show();
 
 };
 
+function watchForm() {
+  $('.contentBox').hide();
+  $('.homePage').show();
+  $(`.introText`).show();
+  $(`.moodText`).hide();
+
+};
 // Sets up the Homepage
 $(function () {
-
+  
   console.log('App loaded! Waiting for submit!');
 
-  $('.homePage').show();
+  $(watchForm);
 
 });
 
@@ -176,3 +209,6 @@ document.getElementById("moodButton").addEventListener("click", moodForm);
 document.getElementById("placeButton").addEventListener("click", placeForm);
 document.getElementById("locationSubmit").addEventListener("click", getAddress); 
 //document.getElementById("recipeInfoButton").addEventListener("click", getRecipeDetails); 
+document.getElementById("backButton").addEventListener("click", getRecipe);
+document.getElementById("mood2Button").addEventListener("click", moodForm);
+document.getElementById("logoButton").addEventListener("click", watchForm);
