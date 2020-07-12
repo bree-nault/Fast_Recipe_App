@@ -83,6 +83,7 @@ input[type="text"] {
     background-color: #ccb283;
     font-size: 18px;
     border: 2px solid rgb(255, 255, 255);
+    margin: 20px
     }
 
     .button:hover {
@@ -96,32 +97,77 @@ input[type="text"] {
   }
 
 
-  @media only screen and (min-width: 400px) {
+  @media only screen and (min-width: 700px) {
     body {
 
-      background-image: url("webImages/backgroundFood7.jpeg");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: 80% 0%; 
-    
-      font-family: "Roboto", sans-serif;
-      color: #000000;
-      text-align: center;
       font-size: 20px;
-      line-height: 1.5;
-    }
 
+    }
+    header {
+      text-align: left;
+      padding: 20px 0px 40px 150px;
+    }
     section {
-      min-height: 200px;
-      margin: 0% 5% 0% 5%;
-      border: 2px solid rgb(255, 255, 255);
-      border-radius: 5%;
+      min-height: 450px;
+      margin: 25px 150px 0px 150px;
+      border: 1px solid rgb(255, 255, 255);
       background: rgba(255, 255, 255, 0.5)
     }
 
     .imgStyle {
+margin: 50px 0px 0px 0px;
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 5%;
       width: 50%;
       height: auto;
     }
+
+    div.logoBox {
+      background-color: #7F6F52;
+      width: 200px;
+      height:200px;
+      border: 2px solid rgb(255, 255, 255);
+      }
+      
+      #logoButton{
+        background-repeat: no-repeat;
+        width: 200px;
+      }
+      .contentBox {
+        padding: 0% ;
+      }
+      h1 {
+        margin: 20px;
+        font-size: 44px;
+      }
+      input[type="text"] {
+
+        width: 400px;
+        margin: 20px 0px;
+        }
+      
+        .button {
+          display:block;
+          margin-left:auto;
+          margin-right:auto;
+          width: 200px;
+          background-color: #ccb283;
+          font-size: 18px;
+          border: 2px solid rgb(255, 255, 255);
+          }
+          label {
+            display:block;
+            }
+            h2 {
+              margin: 30px;
+              font-size:28px;
+            }
+
+            }
+            li {
+              margin: 0% 10%;
+              text-align: left;
+              
+            }
+            
   }

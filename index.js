@@ -119,7 +119,7 @@ function displayResults(responseJson) {
   }
   $('.resultsList').append(`
   <h3> Instructions: </h3>
-  <p>${responseJson.recipes[0].instructions}</p>`);
+  <p class="instructionBox">${responseJson.recipes[0].instructions}</p>`);
 
   //display the results section
   $('.contentBox').hide();
