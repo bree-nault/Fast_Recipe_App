@@ -1,27 +1,18 @@
 // Global Variable for user Input
 var foodType = {};
 
-
-function getRecipeDetails() {
-  $('.contentBox').hide();
-  $('.recipeDetails').show();
-}
-
+// Displays results of search
 function results(contents) {
-  
-  console.log(contents);
-  //Finds and displays username
+  $('.placeListUL').empty();
 
-    $('.placeListUL').empty();
-
-    $('.placeListUL').append(`<h2>Places serving ${foodType.food}:</h2>`);
-    for (let i = 0; i < contents.results.length; i++) {
-      $('.placeListUL').append(`<li>
+  $('.placeListUL').append(`<h2>Places serving ${foodType.food}:</h2>`);
+  for (let i = 0; i < contents.results.length; i++) {
+    $('.placeListUL').append(`<li>
       <h3>${contents.results[i].name}</h3>
       <p>${contents.results[i].vicinity}</p>
           </li>`);
 
-}
+  }
   $('.placeList').show();
   $('.addressInputBox').hide();
 };
@@ -36,6 +27,7 @@ function determineArray2(contents) {
   }
 };
 
+// finds places near users address
 function getPlaces(responseJson) {
 
   var lat = responseJson.results[0].geometry.location.lat;
@@ -80,28 +72,22 @@ function getCoordinates(addressEntered) {
 function getAddress() {
   event.preventDefault();
   let addressEntered = $('input[name="locationBox"]').val().toLowerCase();
-  console.log('Your address is ' + addressEntered + '.');
+
   getCoordinates(addressEntered);
 };
 
 // Displays section for food places
 function placeForm() {
 
-  console.log('Place Section Displayed!');
   $('.placeListUL').empty();
   $('.contentBox').hide();
   $('.addressInputBox').show();
   $('.placeList').show();
-
-
 };
 
 // Displays Results for Recipe
 function displayResults(responseJson) {
 
-  console.log(responseJson)
-
-  //Finds and displays username
   let recipeinfo = `
   <img src= ${responseJson.recipes[0].image} class="imgStyle" alt="Recipe Photo">
         <h2><span> ${responseJson.recipes[0].title}</span></h2>
@@ -161,12 +147,12 @@ function getFoodType() {
   event.preventDefault();
   foodType.food = $('input[name="foodType"]').val().toLowerCase();
 
-  if (foodType.food.length == 0){
+  if (foodType.food.length == 0) {
     alert(`Please enter what you're hungry for!`)
   } else {
-  console.log('You searched for ' + foodType.food + '.');
-  getRecipe();
-};
+
+    getRecipe();
+  };
 };
 
 // Displays sections to change user input
@@ -195,11 +181,7 @@ function watchForm() {
 };
 // Sets up the Homepage
 $(function () {
-  
-  console.log('App loaded! Waiting for submit!');
-
   $(watchForm);
-
 });
 
 // Button Listeners
@@ -207,8 +189,7 @@ document.getElementById("foodType").addEventListener("click", getFoodType);
 document.getElementById("recipeButton").addEventListener("click", getRecipe);
 document.getElementById("moodButton").addEventListener("click", moodForm);
 document.getElementById("placeButton").addEventListener("click", placeForm);
-document.getElementById("locationSubmit").addEventListener("click", getAddress); 
-//document.getElementById("recipeInfoButton").addEventListener("click", getRecipeDetails); 
+document.getElementById("locationSubmit").addEventListener("click", getAddress);
 document.getElementById("backButton").addEventListener("click", getRecipe);
 document.getElementById("mood2Button").addEventListener("click", moodForm);
 document.getElementById("logoButton").addEventListener("click", watchForm);
