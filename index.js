@@ -20,16 +20,16 @@ function results(contents) {
 // Determines if there are items in the array
 function determineArray2(contents) {
   if (!contents.results.length) {
-    console.log('error')
-    alert('Places serving ' + foodtype.food + ' were not found.')
+    $('.errorText').append('Places serving ' + foodtype.food + ' were not found.')
   } else {
+    $('.errorText').empty();
     results(contents)
   }
 };
 
 // finds places near users address
 function getPlaces(responseJson) {
-
+  $('.errorText').empty();
   var lat = responseJson.results[0].geometry.location.lat;
   var lng = responseJson.results[0].geometry.location.lng;
 
@@ -48,14 +48,13 @@ function getPlaces(responseJson) {
   fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
     .then(response => response.json())
     .then(contents => determineArray2(contents))
-    .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
-
+    .catch(() =>  $('.errorText').append("Can’t access " + url + " response. Blocked by browser?"))
 };
 
 
 // get longitude and latitude
 function getCoordinates(addressEntered) {
-
+  $('.errorText').empty();
   var requestOptions = {
     method: 'GET',
     redirect: 'follow'
@@ -64,7 +63,7 @@ function getCoordinates(addressEntered) {
   fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressEntered}&key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc`, requestOptions)
     .then(response => response.json())
     .then(responseJson => getPlaces(responseJson))
-    .catch(error => alert('Please enter your city and state.'));
+    .catch(error => $('.errorText').append(`<h4>Please enter your city and state.</h4>`));
 
 };
 
@@ -92,7 +91,6 @@ function displayResults(responseJson) {
   <img src= ${responseJson.recipes[0].image} class="imgStyle" alt="Recipe Photo">
         <h2><span> ${responseJson.recipes[0].title}</span></h2>
         <p><span> Make Time: ${responseJson.recipes[0].readyInMinutes}</span></p>
-  
     `
   $('.recipeScreen').html(recipeinfo)
 
@@ -116,16 +114,17 @@ function displayResults(responseJson) {
 // Determines if there are items in the array
 function determineArray(responseJson) {
   if (!responseJson.recipes.length) {
-    console.log('error')
-    alert('No recipe with that word. Try again!')
+    $('.errorText').empty();
+    $('.errorText').append(`<h4>No recipe with that word. Try again!</h4>`);
   } else {
+    $('.errorText').empty();
     displayResults(responseJson)
   }
 };
 
 // gets Recipe
 function getRecipe() {
-
+  $('.errorText').empty();
   var myHeaders = new Headers();
   myHeaders.append("Cookie", "__cfduid=ddd682a376a74e135db9ba9aea36449381592783324");
 
@@ -139,7 +138,8 @@ function getRecipe() {
   fetch(`https://api.spoonacular.com/recipes/random?number=1&tags=${foodType.food}&apiKey=b74ed27d7c9b401381916b81a36ee0ab`, requestOptions)
     .then(response => response.json())
     .then(responseJson => determineArray(responseJson))
-    .catch(error => alert('Something went wrong. Try again later.'));
+    .catch(error => 
+      $('.errorText').append(`<h4>No recipe with that word. Try again!</h4>`));
 };
 
 // Get the users input
@@ -148,9 +148,11 @@ function getFoodType() {
   foodType.food = $('input[name="foodType"]').val().toLowerCase();
 
   if (foodType.food.length == 0) {
-    alert(`Please enter what you're hungry for!`)
-  } else {
+    $('.errorText').empty();
+    $('.errorText').append(`<h4>Please enter what you're hungry for!</h4>`);
 
+  } else {
+    $('.errorText').empty();
     getRecipe();
   };
 };
