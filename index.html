@@ -46,8 +46,8 @@
             <form>
                 <label for="foodType">
                     What are you in the mood for?</label>
-                <input type="text" onfocus="this.value=''" name="foodType" class="inputBox" required/>
-                <input id="foodType" class="button" type="submit" value="Get me a recipe!" />
+                <input type="text" id="foodType" onfocus="this.value=''" name="foodType" class="inputBox" required/>
+                <input class="button" type="submit" value="Get me a recipe!" />
             </form>
 
             <div class="errorText">
@@ -79,9 +79,9 @@
 
             <div class="addressInputBox">
             <h2>Where are you?</h2>    
-            <label for="locationSubmit">
+            <label for="locationTextBox">
                 Please enter your city and state</label>
-            <input type="text" name="locationBox" class="inputBox" required>
+            <input id="locationTextBox"" type="text" name="locationBox" class="inputBox" required>
             <input id="locationSubmit" class="button"  type="submit" value="Here I am!">
             </div>
 
@@ -112,11 +112,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGnZ67EDIku1msVd4nZwRzzB-rDPnGAZc&libraries=places"></script>
 
     <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        gapi.load('auth2', function () {
-            // Library loaded.
-        });
-    </script>
+
 
 </body>
 
