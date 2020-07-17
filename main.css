@@ -54,6 +54,9 @@ h2 {
 .h3Style {
   margin-top: 0px;
 }
+p {
+  padding: 0px 150px;
+}
 .imgStyle {
   width: 100%;
   height: auto;
